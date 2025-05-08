@@ -1,0 +1,24 @@
+{
+  "name": "defund-fascists",
+  "version": "1.0.0",
+  "description": "Warns users before supporting companies with right-wing political ties",
+  "scripts": {
+    "build": "zip -r defundfascists.zip manifest.json *.js *.html *.css images/ .github/ docs/ LICENSE README.md flagged_companies.json -x \"*.DS_Store\"",
+    "clean": "rm -f defundfascists.zip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/defundfascists/defundfascists-plugin.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "activism",
+    "shopping"
+  ],
+  "author": "Defund Fascists",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/defundfascists/defundfascists-plugin/issues"
+  },
+  "homepage": "https://github.com/defundfascists/defundfascists-plugin#readme"
+} 

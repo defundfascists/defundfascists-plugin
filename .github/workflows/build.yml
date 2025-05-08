@@ -1,0 +1,83 @@
+name: Build Extension
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'flagged_companies.json'
+      - '**.md'
+      - 'LICENSE'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for proper release notes
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Create package version
+        id: package-version
+        run: |
+          VERSION=$(jq -r '.version' package.json)
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          BUILD_VERSION="$VERSION.$COMMIT_COUNT"
+          echo "BUILD_VERSION=$BUILD_VERSION" >> $GITHUB_ENV
+          echo "Package version: $BUILD_VERSION"
+          
+          # Update manifest.json with the new version
+          jq ".version = \"$BUILD_VERSION\"" manifest.json > manifest.json.tmp
+          mv manifest.json.tmp manifest.json
+
+      - name: Package Extension
+        run: |
+          zip -r defundfascists-${{ env.BUILD_VERSION }}.zip manifest.json *.js *.html *.css images/ .github/ISSUE_TEMPLATE/ docs/ LICENSE README.md flagged_companies.json -x "*.DS_Store"
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No previous tags found, using all commits for changelog"
+            CHANGES=$(git log --pretty=format:"* %s" | head -10)
+          else
+            echo "Using changes since $LATEST_TAG for changelog"
+            CHANGES=$(git log --pretty=format:"* %s" $LATEST_TAG..HEAD | head -10)
+          fi
+          echo "CHANGES<<EOF" >> $GITHUB_ENV
+          echo "$CHANGES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.BUILD_VERSION }}
+          release_name: Release v${{ env.BUILD_VERSION }}
+          body: |
+            ## What's New
+            ${{ env.CHANGES }}
+            
+            ## Installation
+            Download the ZIP file and load it as an unpacked extension in Chrome
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./defundfascists-${{ env.BUILD_VERSION }}.zip
+          asset_name: defundfascists-${{ env.BUILD_VERSION }}.zip
+          asset_content_type: application/zip 
