@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "updated": "2023-07-01",
+  "brands": {
+    "MyPillow": { 
+      "flag": true, 
+      "reason": "Supports election denial",
+      "details": "Company founder has repeatedly promoted conspiracy theories and endorsed far-right political causes",
+      "categories": ["home goods"]
+    },
+    "Goya": { 
+      "flag": true, 
+      "reason": "Donated to right-wing political causes",
+      "details": "CEO has publicly supported far-right politicians and causes",
+      "categories": ["food"]
+    },
+    "Black Rifle Coffee Company": {
+      "flag": true,
+      "reason": "Supports far-right causes",
+      "details": "Company markets directly to right-wing extremist groups and has supported divisive political figures",
+      "categories": ["food", "beverages"]
+    },
+    "Hobby Lobby": {
+      "flag": true,
+      "reason": "Donated to right-wing causes",
+      "details": "Company has funded organizations that promote anti-LGBTQ+ policies and religious extremism",
+      "categories": ["crafts", "home goods"]
+    }
+  }
+}
+  

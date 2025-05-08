@@ -1,0 +1,67 @@
+/* Styles for Defund Fascists extension */
+
+.defund-fascists-warning {
+  background-color: #ffeceb;
+  border: 2px solid #ff4d4d;
+  border-radius: 5px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  margin: 10px 0;
+  padding: 12px;
+  position: relative;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+}
+
+.warning-header {
+  color: #cc0000;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.warning-content {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.warning-content p {
+  margin: 5px 0;
+}
+
+.warning-footer {
+  border-top: 1px solid #ffcccc;
+  font-size: 12px;
+  margin-top: 8px;
+  padding-top: 8px;
+  text-align: right;
+}
+
+.warning-more-info {
+  color: #cc0000;
+  text-decoration: none;
+}
+
+.warning-more-info:hover {
+  text-decoration: underline;
+}
+
+/* Styling for Amazon */
+[data-component-type="s-search-result"] .defund-fascists-warning {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+/* Styling for Walmart */
+[data-testid="search-result-gridview-item"] .defund-fascists-warning {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+/* Styling for Target */
+[data-test="product-card"] .defund-fascists-warning {
+  font-size: 12px;
+  margin-bottom: 8px;
+} 

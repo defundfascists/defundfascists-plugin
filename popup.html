@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Defund Fascists</title>
+  <style>
+    body {
+      width: 300px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    h1 {
+      color: #cc0000;
+      font-size: 18px;
+      margin: 0 0 5px 0;
+    }
+    .status {
+      background-color: #e9f7ef;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    .status.active {
+      background-color: #e9f7ef;
+      border-left: 4px solid #27ae60;
+    }
+    .status.inactive {
+      background-color: #f7f7f7;
+      border-left: 4px solid #bdc3c7;
+    }
+    .status-icon {
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+    .stats {
+      margin-bottom: 15px;
+    }
+    .stats div {
+      margin-bottom: 5px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    button {
+      background-color: #cc0000;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover {
+      background-color: #aa0000;
+    }
+    button.secondary {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    button.secondary:hover {
+      background-color: #e0e0e0;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      margin-left: 10px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #cc0000;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    footer {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Defund Fascists</h1>
+    <p>Warns about problematic companies on shopping sites</p>
+  </header>
+
+  <div class="status active">
+    <span class="status-icon">✓</span>
+    <span class="status-text">Extension active</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="extensionToggle" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="stats">
+    <div>Database version: <span id="dbVersion">1.0</span></div>
+    <div>Companies flagged: <span id="companiesCount">0</span></div>
+    <div>Last updated: <span id="lastUpdated">Loading...</span></div>
+  </div>
+
+  <div class="buttons">
+    <button id="updateDb" class="secondary">Update database</button>
+    <button id="reportCompany">Report a company</button>
+  </div>
+
+  <footer>
+    <p>Have feedback? <a href="https://github.com/defundfascists/defundfascists-plugin" target="_blank">Visit our GitHub</a></p>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html> 
